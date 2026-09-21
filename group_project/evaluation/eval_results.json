@@ -1,0 +1,140 @@
+{
+  "summary_a": {
+    "faithfulness": 0.97,
+    "answer_relevance": 0.94,
+    "context_recall": 0.9187,
+    "context_precision": 1.0,
+    "latency": 3.4462,
+    "average": 0.9572
+  },
+  "summary_b": {
+    "faithfulness": 0.97,
+    "answer_relevance": 0.94,
+    "context_recall": 0.9225,
+    "context_precision": 1.0,
+    "latency": 3.1578,
+    "average": 0.9581
+  },
+  "worst": [
+    {
+      "idx": 13,
+      "question": "Trường hợp hóa đơn điện tử đã lập có sai sót về tên, địa chỉ người mua nhưng không sai mã số thuế và số tiền thì xử lý như thế nào?",
+      "score_a": 0.874325,
+      "score_b": 0.874325,
+      "item_a": {
+        "question": "Trường hợp hóa đơn điện tử đã lập có sai sót về tên, địa chỉ người mua nhưng không sai mã số thuế và số tiền thì xử lý như thế nào?",
+        "faithfulness": 0.95,
+        "answer_relevance": 0.9,
+        "context_recall": 0.6473,
+        "context_precision": 1.0,
+        "latency": 4.529160022735596,
+        "answer": "Trong trường hợp hóa đơn điện tử đã lập có sai sót về tên, địa chỉ người mua nhưng không sai mã số thuế và số tiền, người bán có thể thực hiện điều chỉnh hóa đơn theo quy định tại Thông tư 91/2026/TT-BTC. Cụ thể, người bán sẽ lập hóa đơn thay thế cho hóa đơn đã lập sai (Document 2 | Citation: news/article_04.md::chunk-49)."
+      },
+      "item_b": {
+        "question": "Trường hợp hóa đơn điện tử đã lập có sai sót về tên, địa chỉ người mua nhưng không sai mã số thuế và số tiền thì xử lý như thế nào?",
+        "faithfulness": 0.95,
+        "answer_relevance": 0.9,
+        "context_recall": 0.6473,
+        "context_precision": 1.0,
+        "latency": 3.332659959793091,
+        "answer": "Trong trường hợp hóa đơn điện tử đã lập có sai sót về tên, địa chỉ người mua nhưng không sai mã số thuế và số tiền, doanh nghiệp cần thực hiện các bước theo quy định tại Thông tư 91/2026/TT-BTC. Cụ thể, doanh nghiệp sẽ lập hóa đơn điều chỉnh hoặc hóa đơn thay thế cho hóa đơn có sai sót, theo quy trình xử lý được quy định. (Citation: news/article_04.md::chunk-49)"
+      }
+    },
+    {
+      "idx": 14,
+      "question": "Khi hóa đơn điện tử bị sai sót về mã số thuế, số tiền, thuế suất hoặc tiền thuế thì bên bán xử lý bằng những phương án nào?",
+      "score_a": 0.917675,
+      "score_b": 0.877125,
+      "item_a": {
+        "question": "Khi hóa đơn điện tử bị sai sót về mã số thuế, số tiền, thuế suất hoặc tiền thuế thì bên bán xử lý bằng những phương án nào?",
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_recall": 0.6707,
+        "context_precision": 1.0,
+        "latency": 3.4604268074035645,
+        "answer": "Khi hóa đơn điện tử bị sai sót về mã số thuế, số tiền, thuế suất hoặc tiền thuế, bên bán có thể lựa chọn điều chỉnh hoặc thay thế hóa đơn điện tử (Citation: news/article_04.md::chunk-32)."
+      },
+      "item_b": {
+        "question": "Khi hóa đơn điện tử bị sai sót về mã số thuế, số tiền, thuế suất hoặc tiền thuế thì bên bán xử lý bằng những phương án nào?",
+        "faithfulness": 0.95,
+        "answer_relevance": 0.9,
+        "context_recall": 0.6585,
+        "context_precision": 1.0,
+        "latency": 2.909546136856079,
+        "answer": "Khi hóa đơn điện tử bị sai sót về mã số thuế, số tiền, thuế suất hoặc tiền thuế, bên bán có thể lựa chọn điều chỉnh hoặc thay thế hóa đơn điện tử (Citation: news/article_04.md::chunk-32)."
+      }
+    },
+    {
+      "idx": 3,
+      "question": "Những khoản thu nhập nào của doanh nghiệp thuộc diện được miễn thuế thu nhập doanh nghiệp?",
+      "score_a": 0.9051750000000001,
+      "score_b": 0.877375,
+      "item_a": {
+        "question": "Những khoản thu nhập nào của doanh nghiệp thuộc diện được miễn thuế thu nhập doanh nghiệp?",
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_recall": 0.6207,
+        "context_precision": 1.0,
+        "latency": 2.282731056213379,
+        "answer": "Các khoản thu nhập thuộc diện miễn thuế được quy định cụ thể tại Luật Thuế TNDN và văn bản hướng dẫn (Citation: news/article_01.md::chunk-83)."
+      },
+      "item_b": {
+        "question": "Những khoản thu nhập nào của doanh nghiệp thuộc diện được miễn thuế thu nhập doanh nghiệp?",
+        "faithfulness": 0.95,
+        "answer_relevance": 0.9,
+        "context_recall": 0.6595,
+        "context_precision": 1.0,
+        "latency": 1.9337549209594727,
+        "answer": "Các khoản thu nhập thuộc diện miễn thuế được quy định cụ thể tại Luật Thuế TNDN và văn bản hướng dẫn (Citation: news/article_01.md::chunk-83)."
+      }
+    },
+    {
+      "idx": 20,
+      "question": "Theo Nghị định số 126/2020/NĐ-CP, những loại thuế và khoản thu nào thuộc diện kê khai theo tháng?",
+      "score_a": 0.929,
+      "score_b": 0.913525,
+      "item_a": {
+        "question": "Theo Nghị định số 126/2020/NĐ-CP, những loại thuế và khoản thu nào thuộc diện kê khai theo tháng?",
+        "faithfulness": 0.95,
+        "answer_relevance": 0.9,
+        "context_recall": 0.866,
+        "context_precision": 1.0,
+        "latency": 2.5281121730804443,
+        "answer": "Theo Nghị định số 126/2020/NĐ-CP, các loại thuế, khoản thu khác thuộc ngân sách nhà nước do cơ quan quản lý thuế quản lý thu thuộc loại kê khai theo tháng, nhưng cụ thể danh mục các loại thuế và khoản thu này không được nêu rõ trong đoạn văn được cung cấp. Do đó, không thể xác minh chính xác những loại thuế và khoản thu nào thuộc diện kê khai theo tháng. (Citation: legal/nghi_dinh_126_2020_nd_cp_quan_ly_thue_doanh_nghiep.md::chunk-64)"
+      },
+      "item_b": {
+        "question": "Theo Nghị định số 126/2020/NĐ-CP, những loại thuế và khoản thu nào thuộc diện kê khai theo tháng?",
+        "faithfulness": 0.95,
+        "answer_relevance": 0.9,
+        "context_recall": 0.8041,
+        "context_precision": 1.0,
+        "latency": 2.4106221199035645,
+        "answer": "Theo Nghị định số 126/2020/NĐ-CP, các loại thuế, khoản thu khác thuộc ngân sách nhà nước do cơ quan quản lý thuế quản lý thuộc loại kê khai theo tháng bao gồm các loại thuế, khoản thu khác được quy định tại Điều 8 của Nghị định này (Citation: legal/nghi_dinh_126_2020_nd_cp_quan_ly_thue_doanh_nghiep.md::chunk-64)."
+      }
+    },
+    {
+      "idx": 2,
+      "question": "Theo quy định mới áp dụng năm 2026, các mức thuế suất thuế thu nhập doanh nghiệp phổ biến được phân loại theo doanh thu như thế nào?",
+      "score_a": 0.916675,
+      "score_b": 0.934525,
+      "item_a": {
+        "question": "Theo quy định mới áp dụng năm 2026, các mức thuế suất thuế thu nhập doanh nghiệp phổ biến được phân loại theo doanh thu như thế nào?",
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_recall": 0.6667,
+        "context_precision": 1.0,
+        "latency": 2.6703929901123047,
+        "answer": "Theo quy định mới áp dụng năm 2026, các mức thuế suất thuế thu nhập doanh nghiệp (TNDN) phổ biến được phân loại là 15%, 17% và 20%. Mức thuế suất áp dụng cho từng doanh nghiệp phụ thuộc vào tổng doanh thu và trường hợp hoạt động cụ thể (Citation: news/article_01.md::chunk-57)."
+      },
+      "item_b": {
+        "question": "Theo quy định mới áp dụng năm 2026, các mức thuế suất thuế thu nhập doanh nghiệp phổ biến được phân loại theo doanh thu như thế nào?",
+        "faithfulness": 1.0,
+        "answer_relevance": 1.0,
+        "context_recall": 0.7381,
+        "context_precision": 1.0,
+        "latency": 2.415817975997925,
+        "answer": "Theo quy định mới áp dụng năm 2026, các mức thuế suất thuế thu nhập doanh nghiệp (TNDN) phổ biến được phân loại theo doanh thu và trường hợp hoạt động cụ thể của từng doanh nghiệp, với ba mức thuế suất là 15%, 17% và 20% (Citation: news/article_01.md::chunk-57)."
+      }
+    }
+  ]
+}
