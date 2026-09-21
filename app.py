@@ -1,7 +1,18 @@
+import sys
+from pathlib import Path
+
+# Đảm bảo project root luôn có trong sys.path khi chạy bằng streamlit run
+_PROJECT_ROOT = Path(__file__).parent.resolve()
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
 import streamlit as st
 from dotenv import load_dotenv
 
-from src.task10_generation import generate_with_citation
+try:
+    from src.task10_generation import generate_with_citation
+except ImportError:
+    from task10_generation import generate_with_citation  # type: ignore
 
 load_dotenv()
 
