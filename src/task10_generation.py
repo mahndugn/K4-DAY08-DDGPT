@@ -28,6 +28,19 @@ LLM_MODEL = os.getenv("LLM_MODEL", "")
 SYSTEM_PROMPT = """Trả lời chỉ từ context được cung cấp.
 Mỗi khẳng định phải có citation. Nếu thiếu evidence, hãy từ chối xác minh."""
 
+SAFE_REFUSAL = "Tôi không thể xác minh thông tin này từ nguồn hiện có."
+
+
+def retrieve(query: str, top_k: int) -> list[dict]:
+    """Load Task 9 only when generation is requested.
+
+    This keeps context-formatting utilities usable in environments that have
+    not installed the optional retrieval providers yet.
+    """
+    from .task9_retrieval_pipeline import retrieve as retrieve_from_pipeline
+
+    return retrieve_from_pipeline(query, top_k=top_k)
+
 
 def reorder_for_llm(chunks: list[dict]) -> list[dict]:
     """Đưa chunks quan trọng về đầu và cuối context."""
@@ -163,25 +176,51 @@ def call_llm(system_prompt: str, user_message: str) -> str:
 
 def generate_with_citation(query: str, top_k: int = TOP_K) -> dict:
     """Trả về GenerationResult."""
-    # TODO: Implement end-to-end generation.
-    #
-    # chunks = retrieve(query, top_k=top_k)
-    # if not chunks:
-    #     return {
-    #         "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
-    #         "sources": [],
-    #         "retrieval_source": "none",
-    #     }
-    # reordered = reorder_for_llm(chunks)
-    # context = format_context(reordered)
-    # user_message = f"Context:\n{context}\n\nQuestion: {query}"
-    # answer = call_llm(SYSTEM_PROMPT, user_message)
-    # return {
-    #     "answer": answer,
-    #     "sources": chunks,
-    #     "retrieval_source": chunks[0]["retrieval_method"],
-    # }
-    raise NotImplementedError("Implement generate_with_citation")
+    """Retrieve evidence, generate a cited answer, and fail safely.
+
+    ``sources`` deliberately keeps the relevance order returned by Task 9.
+    Only the prompt context is reordered to reduce lost-in-the-middle effects.
+    """
+    try:
+        chunks = retrieve(query, top_k=top_k)
+    except Exception:
+        # Retrieval providers must never make the chat UI crash.
+        chunks = []
+
+    if not chunks:
+        return {
+            "answer": SAFE_REFUSAL,
+            "sources": [],
+            "retrieval_source": "none",
+        }
+
+    context = format_context(reorder_for_llm(chunks))
+    user_message = (
+        f"Context:\n{context}\n\n"
+        f"Question: {query}\n\n"
+        "Answer in Vietnamese. Cite every factual claim with the exact "
+        "Citation value from the relevant document, for example [chunk-12]."
+    )
+    try:
+        answer = call_llm(SYSTEM_PROMPT, user_message)
+    except Exception:
+        # Never return an answer that is not grounded in the retrieved context.
+        return {
+            "answer": SAFE_REFUSAL,
+            "sources": chunks,
+            "retrieval_source": _retrieval_source(chunks),
+        }
+
+    return {
+        "answer": answer,
+        "sources": chunks,
+        "retrieval_source": _retrieval_source(chunks),
+    }
+
+
+def _retrieval_source(chunks: list[dict]) -> str:
+    """Map Task 9's result method to the public generation contract."""
+    return "pageindex" if chunks[0].get("retrieval_method") == "pageindex" else "hybrid"
 
 
 if __name__ == "__main__":
