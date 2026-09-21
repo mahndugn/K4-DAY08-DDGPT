@@ -15,6 +15,9 @@ import os
 
 from dotenv import load_dotenv
 
+from .contracts import validate_generation_result
+from .task9_retrieval_pipeline import retrieve
+
 load_dotenv()
 
 TOP_K = 5
@@ -163,25 +166,44 @@ def call_llm(system_prompt: str, user_message: str) -> str:
 
 def generate_with_citation(query: str, top_k: int = TOP_K) -> dict:
     """Trả về GenerationResult."""
-    # TODO: Implement end-to-end generation.
-    #
-    # chunks = retrieve(query, top_k=top_k)
-    # if not chunks:
-    #     return {
-    #         "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
-    #         "sources": [],
-    #         "retrieval_source": "none",
-    #     }
-    # reordered = reorder_for_llm(chunks)
-    # context = format_context(reordered)
-    # user_message = f"Context:\n{context}\n\nQuestion: {query}"
-    # answer = call_llm(SYSTEM_PROMPT, user_message)
-    # return {
-    #     "answer": answer,
-    #     "sources": chunks,
-    #     "retrieval_source": chunks[0]["retrieval_method"],
-    # }
-    raise NotImplementedError("Implement generate_with_citation")
+    if not isinstance(query, str) or not query.strip():
+        result = {
+            "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+            "sources": [],
+            "retrieval_source": "none",
+        }
+        validate_generation_result(result)
+        return result
+
+    chunks = retrieve(query.strip(), top_k=top_k)
+    if not chunks:
+        result = {
+            "answer": "Tôi không thể xác minh thông tin này từ nguồn hiện có.",
+            "sources": [],
+            "retrieval_source": "none",
+        }
+        validate_generation_result(result)
+        return result
+
+    reordered = reorder_for_llm(chunks)
+    context = format_context(reordered)
+    user_message = f"Context:\n{context}\n\nQuestion: {query.strip()}"
+    try:
+        answer = call_llm(SYSTEM_PROMPT, user_message)
+    except Exception:
+        answer = "Tôi không thể xác minh thông tin này từ nguồn hiện có do lỗi khi kết nối mô hình ngôn ngữ."
+
+    retrieval_source = chunks[0].get("retrieval_method", "hybrid")
+    if retrieval_source not in {"hybrid", "pageindex", "none"}:
+        retrieval_source = "hybrid"
+
+    result = {
+        "answer": answer,
+        "sources": chunks,
+        "retrieval_source": retrieval_source,
+    }
+    validate_generation_result(result)
+    return result
 
 
 if __name__ == "__main__":
